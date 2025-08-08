@@ -1,0 +1,702 @@
+/* Server and Usage Time Tabs for Vietnix CSV Import Plugin */
+
+.vietnix-price-table-wrapper {
+    font-family:'Roboto', sans-serif;
+    color:var(--color-text);
+    font-weight:500;
+}
+.vietnix-server-tabs {
+    margin-bottom: 20px;
+  
+}
+
+.vietnix-server-tabs-nav {
+    display: flex;
+    background: linear-gradient(90deg, #007CFC 0%, #0064CC 100%);
+    margin: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 50px;
+    gap: 24px;
+    padding: 8px;
+    border:1px solid rgba(255, 255, 255, 0.50);
+}
+
+.vietnix-server-tab {
+    position:relative;
+      font-size: 18px;
+    display: flex;
+    height: 69px;
+    padding: 0 4px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+    border-radius: 50px; 
+    background: transparent;
+    border: 3px solid transparent;
+
+} 
+
+.vietnix-server-tab:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+}
+
+.vietnix-server-tab.active {
+    color: #38A7FF;
+    background: #FFF;
+    font-weight: 600;
+    border-color: #AFDCFF;
+
+}
+ 
+span.vietnix-server-sale {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    position: absolute;
+    top: -20px;
+    background:  linear-gradient(90deg, #F3B847 0%, #F49846 100%);
+    display: flex;
+    height: 30px;
+    padding: 0 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    color:#fff;
+    text-transform: capitalize;
+    left: 50%;
+    transform:translateX(-50%)
+}
+ 
+/* Usage Time Tabs (Children) */
+.vietnix-usage-tabs-wrap{
+    display: flex;
+    padding: 64px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.vietnix-usage-tabs {
+    display: none; 
+}
+
+.vietnix-usage-tabs.active {
+    display: block;
+}
+
+.vietnix-usage-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 8px;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width:640px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(0, 124, 252, 0.12) 0%, rgba(0, 100, 204, 0.12) 100%);
+}
+
+.vietnix-usage-tab {
+   display: flex;
+    height: 36px;
+    min-width: 150px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    position:relative;
+    background:transparent;
+    font-size: 16px;
+    line-height: 24px; 
+    font-weight: 500;;
+    color: var(--color-text);
+    box-shadow: unset;
+    text-transform: capitalize;
+    padding:0;
+} 
+.vietnix-usage-tab  span.vietnix-usage-time-label-sale {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    color: #FF9038;
+    border-radius: 16px;
+    border: 1px solid #FF9038;
+    background:  #FFF4EB;
+    display: flex;
+    height: 22px;
+    padding: 0 8px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: unsetu!important;
+} 
+.vietnix-usage-tab:hover { 
+    background:  rgba(255, 255, 255, 0.60); 
+    color:var(--color-text);
+}
+.vietnix-usage-tab.active {
+    background: var(--bg-linear-primary); 
+    color:#fff
+}
+ 
+.vietnix-usage-tab span.vietnix-usage-time-label {
+    position: absolute;
+    top: -22px;
+    color: #fff;
+    left: 50%;
+    -webkit-transform:translateX(-50%);
+    transform:translateX(-50%);
+    text-transform: none;    
+    font-size: 12px;
+    line-height: 22px;
+    display: flex;  
+    gap: 1px;
+}
+.vietnix-usage-tab span.vietnix-usage-time-label svg{
+    width: 11px;
+    fill: #fff;
+}
+.vietnix-usage-tab span.vietnix-usage-time-label:after{
+    content:"";
+    background:url('../image/label-time.png') no-repeat;
+    height:22px;
+    width: 81px;
+    /* background:red; */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    transform: translateX(-50%);
+}
+
+/* Loading Animation */
+.vietnix-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.vietnix-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.vietnix-empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.vietnix-empty-state-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.vietnix-empty-state-subtext {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vietnix-server-tabs-nav {
+        flex-direction: column;
+    }
+    
+    .vietnix-server-tab {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+     
+    
+    .vietnix-server-tab:last-child {
+        border-bottom: none;
+    }
+    
+    .vietnix-usage-tabs {
+        padding: 15px;
+    }
+     
+    
+    .vietnix-usage-tab {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+    
+    .vietnix-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .vietnix-price-table {
+        min-width: 600px;
+    }
+    
+    .vietnix-price-table th,
+    .vietnix-price-table td {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vietnix-server-tab {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+    
+    .vietnix-usage-tab {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .vietnix-price-table th,
+    .vietnix-price-table td {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+}
+
+/* Animation for tab switching */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vietnix-usage-tabs.active {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.vietnix-table-container.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.vietnix-table-container.loaded {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Product Cards Styling */
+.vietnix-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+.vietnix-product-card {
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+}
+
+.vietnix-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Header */
+ 
+.vietnix-product-card .product-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%; 
+    position: relative;
+
+}
+.vietnix-product-card .product-header h3{ 
+    padding: 0 44px 16px 0; 
+    gap: 8px; 
+    margin-bottom:0;
+    color: #525666; 
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; 
+    display: flex;
+    width: 100%;
+}
+
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.product-label {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+
+.product-label.special {
+    background: #ff6b6b;
+    color: white;
+}
+
+.product-label.featured {
+    background: #ffd93d;
+    color: #333;
+}
+
+/* Product Meta */
+.product-meta {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.server-info, .usage-time {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.server-info::before {
+    content: "🖥️";
+    margin-right: 6px;
+}
+
+.usage-time::before {
+    content: "⏱️";
+    margin-right: 6px;
+}
+
+/* Product Content */
+.product-content {
+    padding: 15px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Pricing Section */
+.pricing-section {
+    padding: 20px;
+    background: #fff;
+}
+
+.main-price {
+    margin-bottom: 12px;
+}
+ .vietnix-products-grid .vietnix-product-card .main-price{
+    display:flex;
+    gap:12px;
+    align-items: flex-end;
+}
+.vietnix-products-grid .vietnix-product-card .main-price span.original-price {
+    color: #757885;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 35px; 
+}
+.vietnix-products-grid .vietnix-product-card .main-price span.sale-price {
+    display: flex;
+    align-items: flex-end;
+
+}
+.vietnix-products-grid .vietnix-product-card .main-price span.sale-price span.current-price-value {
+      font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: -0.72px;    
+    background: var(--bg-linear-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.vietnix-products-grid .vietnix-product-card .main-price span.sale-price span{
+    color: #757885;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 35px; /* 175% */
+}
+
+.vietnix-products-grid .vietnix-product-card .main-price > .img-sale {
+    display: flex;
+    padding-bottom: 8px;
+    align-items: center;
+    gap: 10px;
+    object-fit: contain;
+}
+.vietnix-products-grid .vietnix-product-card .main-price > .img-sale img{
+       width: 28px;
+    height: 28px; 
+}
+.vietnix-products-grid .vietnix-product-card .main-price span.original-price {
+    position: relative;
+}
+
+.vietnix-products-grid .vietnix-product-card .main-price span.original-price:before {
+ content: "";
+  position: absolute;
+  left: 0%;                
+  right:0%;
+  top: 50%;                    
+  height: 1px;                
+  background: #757885;       
+  -webkit-transform: translateY(-50%) rotate(-12deg); 
+  transform: translateY(-50%) rotate(-12deg); 
+  transform-origin: center;
+  pointer-events: none;
+}
+ 
+.time-labels {
+    margin: 10px 0;
+}
+
+.time-label-sale, .time-label {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.time-label-sale {
+    background: #dc3545;
+    color: white;
+}
+
+.time-label {
+    background: #6c757d;
+    color: white;
+}
+ 
+.vietnix-product-card .product-header .addon-pricing {
+    border-radius: 4px;
+    background: #EA4848;
+    display: flex;
+    height: 32px;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.vietnix-product-card .product-header .addon-pricing span.addon-price {
+    color: #fff; 
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; 
+}
+
+.vietnix-product-card .product-header .addon-pricing code.addon-code {
+    color: var(--Base-Color-White, #FFF); 
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
+}
+/* Product Details */
+.product-details {
+    padding: 15px 20px;
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+}
+
+.sku-info {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.description {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #495057;
+}
+
+/* Server Sale */
+.server-sale {
+    padding: 10px 20px;
+    background: #fff3cd;
+    color: #856404;
+    font-size: 13px;
+    font-weight: 500;
+    border-top: 1px solid #ffeaa7;
+}
+
+/* Product Actions */
+.product-actions {
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #e9ecef;
+}
+
+.cta-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Loading & No Products */
+.vietnix-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.no-products {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+/* Responsive Design */
+/* @media (max-width: 768px) {
+    .vietnix-products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .product-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .vietnix-server-tabs-nav {
+        flex-direction: column;
+    }
+     
+     
+} */
+
+/* Copy functionality styles */
+.addon-copy {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(0, 124, 252, 0.1);
+    border: 1px solid rgba(0, 124, 252, 0.2);
+    font-size: 12px;
+    user-select: none;
+}
+
+.addon-copy:hover {
+    background: rgba(0, 124, 252, 0.2);
+    border-color: rgba(0, 124, 252, 0.4);
+    transform: translateY(-1px);
+}
+
+.addon-copy img {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.addon-copy:hover img {
+    opacity: 1;
+}
+
+.addon-copy.copied {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #059669;
+    font-weight: 600;
+}
+
+.addon-copy.copy-error {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #dc2626;
+    font-weight: 600;
+}
+ 
