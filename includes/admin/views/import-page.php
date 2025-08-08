@@ -1,0 +1,188 @@
+<div class="wrap">
+    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+    
+    <div class="vietnix-csv-import-page">
+        <div class="postbox">
+            <h2 class="title-handle"><?php _e('Import CSV File', 'vietnix-csv-import'); ?></h2>
+            <div class="inside">
+                <form id="vietnix-csv-import-form" method="post" enctype="multipart/form-data">
+                    <?php wp_nonce_field('vietnix_csv_import_nonce', 'vietnix_csv_nonce'); ?>
+                    
+                    <table class="form-table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <label for="csv_file"><?php _e('CSV File', 'vietnix-csv-import'); ?> <span class="required">*</span></label>
+                                </th>
+                                <td>
+                                    <input type="file" id="csv_file" name="csv_file" accept=".csv" required />
+                                    <p class="description">
+                                        <?php _e('Chọn file với định dạng CSV. Dung lượng tối đa: 10MB', 'vietnix-csv-import'); ?>
+                                         
+                                    </p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">
+                                    <label for="clear_existing"><?php _e('Xoá hết dữ liệu tồn tại', 'vietnix-csv-import'); ?></label>
+                                </th>
+                                <td>
+                                    <input type="checkbox" id="clear_existing" name="clear_existing" value="1" />
+                                    <label for="clear_existing"><?php _e('Xoá hết dữ liệu tồn tại trước khi nhập', 'vietnix-csv-import'); ?></label>
+                                    <p class="description"><?php _e('Cảnh báo: Hành động này sẽ xóa vĩnh viễn tất cả dữ liệu giá hiện tại.', 'vietnix-csv-import'); ?></p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th scope="row">
+                                    <label for="download_images"><?php _e('Tải hình ảnh về', 'vietnix-csv-import'); ?></label>
+                                </th>
+                                <td>
+                                    <input type="checkbox" id="download_images" name="download_images" value="1" checked />
+                                    <label for="download_images"><?php _e('Tự động tải hình ảnh từ URL về Media Library', 'vietnix-csv-import'); ?></label>
+                                    <p class="description">
+                                        <?php _e('Nếu bật, plugin sẽ tự động tải các hình ảnh từ URL trong cột product_content về Media Library và thay thế bằng URL mới.', 'vietnix-csv-import'); ?>
+                                        <br>
+                                        <strong><?php _e('Lưu ý:', 'vietnix-csv-import'); ?></strong> <?php _e('Quá trình này có thể mất thời gian nếu có nhiều hình ảnh.', 'vietnix-csv-import'); ?>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p class="submit">
+                        <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Import CSV', 'vietnix-csv-import'); ?>" />
+                        <span class="spinner"></span>
+                    </p>
+                </form>
+            </div>
+        </div> 
+        
+        <?php
+        // Hiển thị statistics nếu có data
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'vietnix_price_data';
+        $total_items = $wpdb->get_var("SELECT COUNT(*) FROM {$table_name}");
+        
+        if ($total_items > 0):
+        ?>
+        <div class="postbox">
+            <h2 class="title-handle"><?php _e('Current Data Statistics', 'vietnix-csv-import'); ?></h2>
+            <div class="inside">
+                <?php
+                $stats = array(
+                    'total_items' => $wpdb->get_var("SELECT COUNT(*) FROM {$table_name}"),
+                    'active_items' => $wpdb->get_var("SELECT COUNT(*) FROM {$table_name} WHERE status = 'active'"), 
+                    'last_import' => $wpdb->get_var("SELECT MAX(created_at) FROM {$table_name}")
+                );
+                ?>
+                
+                <div class="vietnix-stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number"><?php echo number_format($stats['total_items']); ?></div>
+                        <div class="stat-label"><?php _e('Total Items', 'vietnix-csv-import'); ?></div>
+                    </div>   
+                    <div class="stat-box">
+                        <div class="stat-number"><?php echo $stats['last_import'] ? date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($stats['last_import'])) : __('N/A', 'vietnix-csv-import'); ?></div>
+                        <div class="stat-label"><?php _e('Last Import', 'vietnix-csv-import'); ?></div>
+                    </div>
+                    <div class="danger-zone">
+                    <h3><?php _e('Danger Zone', 'vietnix-csv-import'); ?></h3>
+                    <p><?php _e('The following action cannot be undone.', 'vietnix-csv-import'); ?></p>
+                    <button type="button" id="delete-all-data" class="button button-secondary"><?php _e('Delete All Data', 'vietnix-csv-import'); ?></button>
+                </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <?php endif; ?>
+        
+        <div class="postbox">
+            <h2 class="title-handle"><?php _e('Cách sử dụng', 'vietnix-csv-import'); ?></h2>
+            <div class="inside">
+                <h3><?php _e('Sau khi Import thành công.', 'vietnix-csv-import'); ?></h3>
+                <p><?php _e('Bạn có thể hiển thị dữ liệu đó trên bất kỳ trang hoặc bài đăng nào bằng cách sử dụng mã ngắn:', 'vietnix-csv-import'); ?></p>
+                <code>[vietnix_price_table]</code> 
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+<script>
+jQuery(document).ready(function($) {
+    // Import form submission
+    $('#vietnix-csv-import-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+        formData.append('action', 'vietnix_import_csv');
+        formData.append('nonce', vietnixCSVAdmin.nonce);
+        
+        var $submitBtn = $(this).find('#submit');
+        var $spinner = $(this).find('.spinner');
+        
+        // Check if file is selected
+        if (!$('#csv_file')[0].files.length) {
+            alert('<?php _e('Please select a CSV file', 'vietnix-csv-import'); ?>');
+            return;
+        }
+        
+        // Confirm if clearing existing data
+        if ($('#clear_existing').is(':checked')) {
+            if (!confirm('<?php _e('Are you sure you want to delete all existing data before import?', 'vietnix-csv-import'); ?>')) {
+                return;
+            }
+        }
+        
+        $submitBtn.prop('disabled', true);
+        $spinner.addClass('is-active');
+        
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.success) {
+                    alert(response.data.message);
+                    location.reload();
+                } else {
+                    alert(response.data || 'Import failed');
+                }
+            },
+            error: function() {
+                alert('<?php _e('Connection error. Please try again.', 'vietnix-csv-import'); ?>');
+            },
+            complete: function() {
+                $submitBtn.prop('disabled', false);
+                $spinner.removeClass('is-active');
+            }
+        });
+    });
+    
+    // Delete all data
+    $('#delete-all-data').on('click', function() {
+        if (!confirm('<?php _e('Are you sure you want to delete ALL data? This action cannot be undone!', 'vietnix-csv-import'); ?>')) {
+            return;
+        }
+        
+        $.post(ajaxurl, {
+            action: 'vietnix_delete_data',
+            nonce: vietnixCSVAdmin.nonce
+        }, function(response) {
+            if (response.success) {
+                alert(response.data);
+                location.reload();
+            } else {
+                alert(response.data || 'Delete failed');
+            }
+        });
+    });
+    
+   
+});
+</script>
