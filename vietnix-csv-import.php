@@ -13,7 +13,7 @@
  * Requires at least: 5.0
  * Tested up to: 6.4
  * Requires PHP: 7.4
- * Network: false
+ * Network: true
  */
 
 // Ngăn truy cập trực tiếp
