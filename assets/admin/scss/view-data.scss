@@ -1,0 +1,96 @@
+// Import variables and mixins
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// View data page styles
+.category-tag {
+  background: #e1ecf4;
+  color: #39739d;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+// Status indicators
+.status-active,
+.stock-available {
+  color: #46b450;
+  font-weight: bold;
+}
+
+.status-inactive,
+.stock-out {
+  color: $danger-color;
+  font-weight: bold;
+  
+  &.stock-out {
+    font-style: italic;
+    font-weight: normal;
+  }
+}
+
+// Stats grid for view data page
+.vietnix-stats-grid {
+  @include grid-responsive(200px);
+  margin: $spacing-md 0;
+  
+  .stat-box {
+    @include card-style;
+    text-align: center;
+    
+    .stat-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    
+    .stat-label {
+      font-size: $font-size-normal;
+      color: $secondary-color;
+      margin-top: $spacing-xs;
+    }
+  }
+}
+
+// Table navigation
+.tablenav {
+  .alignleft.actions {
+    overflow: visible;
+    
+    form {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      flex-wrap: wrap;
+      
+      input[type="search"] {
+        min-width: 200px;
+      }
+      
+      select {
+        min-width: 120px;
+      }
+    }
+  }
+}
+
+// Responsive table
+.wp-list-table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+// Mobile responsiveness
+@include respond-to('sm') {
+  .tablenav .alignleft.actions form {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    input[type="search"],
+    select {
+      min-width: 200px;
+      width: 100%;
+    }
+  }
+}

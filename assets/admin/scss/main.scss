@@ -1,0 +1,44 @@
+// Main admin SCSS file
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Base admin styles
+.vietnix-csv-plugin {
+  // Common admin styles
+  .notice {
+    margin: 5px 0 15px;
+  }
+  
+  .form-table {
+    th {
+      padding-left: 0;
+    }
+  }
+  
+  .button {
+    &.loading {
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: auto;
+        border: 2px solid transparent;
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

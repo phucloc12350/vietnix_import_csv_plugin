@@ -1,0 +1,45 @@
+// Mixins
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin grid-responsive($min-width: 200px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $spacing-md;
+}
+
+@mixin card-style {
+  background: $background-light;
+  border: 1px solid $border-color;
+  padding: $spacing-md;
+  border-radius: $border-radius;
+}
+
+@mixin danger-zone {
+  background: $danger-background;
+  border: 1px solid color.adjust($danger-color, $lightness: 20%);
+  padding: $spacing-md;
+  border-radius: $border-radius;
+}
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
