@@ -1,0 +1,56 @@
+// Colors
+$primary-color: #0073aa;
+$secondary-color: #666;
+$danger-color: #dc3232;
+$background-light: #f9f9f9;
+$background-lighter: #f4f4f4;
+$border-color: #ddd;
+$danger-background: #fef7f7;
+
+
+
+// Spacing
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 20px;
+$spacing-lg: 30px;
+
+// Typography
+$font-size-small: 12px;
+$font-size-normal: 14px;
+$font-size-large: 18px;
+
+// Border radius
+$border-radius: 4px;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// public variables
+$color_1: var(--color-text);
+$color_2: #fff;
+$color_3: #38A7FF;
+$color_4: #FF9038;
+$color_5: #6c757d;
+$color_6: #525666;
+$color_7: white;
+$color_8: #333;
+$color_9: #495057;
+$color_10: #757885;
+$color_11: var(--Base-Color-White, #FFF);
+$color_12: #856404;
+$color_13: #059669;
+$color_14: #dc2626;
+$bg-linear-primary: linear-gradient(90deg, #007CFC 0%, #0064CC 100%);
+$color-text:#525666;
+$color-primary:#38A7FF;
+$color-primary-2:#38A7FF;
+$font-family_1: 'Roboto', sans-serif;
+$border-color_1: transparent;
+$border-color_2: #AFDCFF;
+$border-color_3: rgba(0, 124, 252, 0.4);
+$border-color_4: rgba(34, 197, 94, 0.4);
+$border-color_5: rgba(239, 68, 68, 0.4);

@@ -1,0 +1,51 @@
+{
+  "name": "vietnix-import-csv-plugin",
+  "version": "1.0.0",
+  "description": "WordPress plugin for importing CSV data with Vue.js and SCSS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "build": "NODE_ENV=production webpack --mode production",
+    "build:js": "NODE_ENV=production webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "build:css": "npm run scss:build",
+    "build:all": "npm run build:js && npm run build:css",
+    "watch": "webpack --mode development --watch",
+    "watch:js": "webpack --mode development --watch",
+    "scss:watch": "npx sass --watch assets/admin/scss:assets/css --style=compressed",
+    "scss:build": "npx sass assets/admin/scss:assets/css --style=compressed",
+    "scss:dev": "npx sass --watch assets/admin/scss:assets/css --style=expanded --source-map",
+    "analyze": "webpack-bundle-analyzer assets/dist/js/*.js"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "csv",
+    "import",
+    "vue",
+    "scss"
+  ],
+  "author": "Vietnix",
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@vue/compiler-sfc": "^3.5.18",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.3",
+    "sass": "^1.90.0",
+    "sass-loader": "^16.0.5",
+    "style-loader": "^4.0.0",
+    "vue": "^3.3.8",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "vue": "^3.3.8"
+  }
+}
