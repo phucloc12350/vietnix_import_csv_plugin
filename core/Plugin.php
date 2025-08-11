@@ -200,37 +200,67 @@ class Plugin
             return;
         }
 
+        // Enqueue Vue.js CDN (fallback)
         wp_enqueue_script(
-            'vietnix-csv-admin-js',
-            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/dist/js/admin.js',
-            array('jquery'),
+            'vue-js',
+            'https://unpkg.com/vue@3/dist/vue.global.js',
+            array(),
+            '3.3.4',
+            true
+        );
+
+        // Admin modules - load theo thứ tự dependency
+        wp_enqueue_script(
+            'vietnix-csv-admin-core',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/admin/js/admin/admin.js',
+            array('jquery', 'vue-js'),
             VIETNIX_IMPORT_CSV_PLUGIN_VERSION,
             true
         );
 
+        wp_enqueue_script(
+            'vietnix-csv-admin-import',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/admin/js/admin/import.js',
+            array('vietnix-csv-admin-core'),
+            VIETNIX_IMPORT_CSV_PLUGIN_VERSION,
+            true
+        );
+
+        wp_enqueue_script(
+            'vietnix-csv-admin-view-data',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/admin/js/admin/view-data.js',
+            array('vietnix-csv-admin-core'),
+            VIETNIX_IMPORT_CSV_PLUGIN_VERSION,
+            true
+        );
+
+        // CSS files
         wp_enqueue_style(
-            'vietnix-csv-main-css',
-            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/main.css',
+            'vietnix-csv-admin-css',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/admin.css',
             array(),
             VIETNIX_IMPORT_CSV_PLUGIN_VERSION
         );
 
         wp_enqueue_style(
-            'vietnix-csv-admin-import-css',
-            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/import.css',
+            'vietnix-csv-import-page-css',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/import-page.css',
             array(),
             VIETNIX_IMPORT_CSV_PLUGIN_VERSION
         );
+        
         wp_enqueue_style(
             'vietnix-csv-admin-view-data-css',
-            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/view-data.css',
+            VIETNIX_IMPORT_CSV_PLUGIN_URL . 'assets/css/admin-view-data.css',
             array(),
             VIETNIX_IMPORT_CSV_PLUGIN_VERSION
         );
-        // Localize script
-        wp_localize_script('vietnix-csv-admin-js', 'vietnixCSVAdmin', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('vietnix_csv_admin_nonce'),
+
+        // Localize script cho AJAX
+        wp_localize_script('vietnix-csv-admin-core', 'vietnix_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'plugin_url' => VIETNIX_IMPORT_CSV_PLUGIN_URL,
+            'nonce' => wp_create_nonce('vietnix_csv_nonce'),
             'confirm_delete' => __('Are you sure you want to delete all data?', 'vietnix-csv-import'),
             'import_success' => __('CSV imported successfully!', 'vietnix-csv-import'),
             'import_error' => __('Import failed. Please check your CSV file.', 'vietnix-csv-import')
